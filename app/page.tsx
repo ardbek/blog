@@ -1,95 +1,52 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import fs from 'fs';
+import path from 'path'
+import matter from 'gray-matter'
+
+import Link from 'next/link'
 
 export default function Home() {
+  const postDir = "posts"
+  
+  const files = fs.readdirSync(path.join(postDir))
+
+  const posts = files.map(filename => {
+    const fileContent = fs.readFileSync(path.join(postDir, filename), 'utf-8')
+
+    const {data: frontMatter } = matter(fileContent)
+    
+    return {
+      meta: frontMatter,
+      slug: filename.replace('.mdx','')
+    }
+
+  })
+  
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="flex flex-col">
+      <h1 className="text-3xl font-bold">
+        My Blogging Site
+      </h1>
+
+      <section className='py-10'>
+        <h2 className='text-2xl font-bold'>
+          Latest Blogs
+        </h2>
+        <div className='py-2'>
+          {posts.map(post => (
+            <Link href={'/posts/' + post.slug} passHref key={post.slug}>
+              <div className='py-2 flex justify-between align-middle gap-2'>
+                  <div>
+                      <h3 className="text-lg font-bold">{post.meta.title}</h3>
+                      <p className="text-gray-400">{post.meta.description}</p>
+                  </div>
+                  <div className="my-auto text-gray-400">
+                      <p>{post.meta.date}</p>
+                  </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </section>
     </main>
   )
 }
