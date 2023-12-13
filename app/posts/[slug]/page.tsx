@@ -3,13 +3,17 @@ import path from 'path'
 import matter from 'gray-matter'
 import {MDXRemote} from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
+import rehypePrism from 'rehype-prism-plus'
+
+import "@/styles/highlight-js/prism-lucario.css"
+
 
 import Button from '@/components/mdx/Button'
 
 const options = {
     mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [],
+        remarkPlugins: [],
+        rehypePlugins: [rehypePrism],
     }
 }
 
@@ -43,7 +47,7 @@ export default function Post({ params } :any) {
         <article className='prose prose-sm md:prose-base lg:prose-lg prose-slate !prose-invert mx-auto'>
             <h1>{props.frontMatter.title}</h1>
 
-             <MDXRemote source={props.content} components={{Button}} options={options}/>
+            <MDXRemote source={props.content} components={{Button}} options={options}/>
         </article>
     )
 
