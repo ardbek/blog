@@ -5,14 +5,15 @@ import {MDXRemote} from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import rehypePrism from 'rehype-prism-plus'
 
-import "@/styles/highlight-js/prism-lucario.css"
+import "@/styles/codeBlock/prism-lucario.css"
+import "@/styles/table/table.css"
 
 
 import Button from '@/components/mdx/Button'
 
 const options = {
     mdxOptions: {
-        remarkPlugins: [],
+        remarkPlugins: [remarkGfm],
         rehypePlugins: [rehypePrism],
     }
 }
@@ -20,11 +21,9 @@ const options = {
 export async function generateStaticParams(){
     const files = fs.readdirSync(path.join('posts'))
 
-    const paths = files.map(filename => ({
-        slug: filename.replace('.mdx','')
+    return files.map(filename => ({
+        slug: filename.replace('.mdx', '')
     }))
-
-    return paths
 }
 
 function getPost({slug}:{slug : string}){
