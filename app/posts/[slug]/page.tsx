@@ -7,6 +7,7 @@ import rehypePrism from 'rehype-prism-plus'
 
 import "@/styles/codeBlock/prism-lucario.css"
 import "@/styles/table/table.css"
+import "@/styles/post.css"
 
 
 import Button from '@/components/mdx/Button'
@@ -43,9 +44,8 @@ export default function Post({ params } :any) {
     const props = getPost(params);
 
     return (
-        <article className='prose prose-sm md:prose-base lg:prose-lg prose-slate !prose-invert mx-auto'>
+        <article>
             <h1>{props.frontMatter.title}</h1>
-
             <MDXRemote source={props.content} components={{Button}} options={options}/>
         </article>
     )

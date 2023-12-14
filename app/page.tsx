@@ -22,24 +22,22 @@ export default function Home() {
     })
 
     return (
-        <main>
-            <section className=''>
-                <div className="">
-                    {posts.map(post => (
-                        <Link href={'/posts/' + post.slug} passHref key={post.slug}>
-                            <div className='border rounded border-slate-400 mb-1 p-2'>
-                                <div className="flex justify-between">
-                                    <span className="">{post.meta.title}</span>
-                                    <span className="text-slate-400 text-xs">{post.meta.date}</span>
-                                </div>
-                                <div className="">
-                                    <p className="text-xs text-slate-500">{post.meta.description}</p>
-                                </div>
+        <main className="w-3/5 mx-auto">
+            <div>
+                {posts.map(post => (
+                    <Link href={'/posts/' + post.slug} passHref key={post.slug}>
+                        <div className='border rounded border-slate-400 mb-1 p-2'>
+                            <div className="flex justify-between">
+                                <span className="">{post.meta.title}</span>
+                                <span className="text-slate-400 text-xs">{post.meta.date}</span>
                             </div>
-                        </Link>
-                    ))}
-                </div>
-            </section>
+                            <div className="">
+                                <p className="text-xs text-slate-500">{post.meta.description}</p>
+                            </div>
+                        </div>
+                    </Link>
+                ))}
+            </div>
         </main>
     )
 }
