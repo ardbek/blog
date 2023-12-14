@@ -2,8 +2,8 @@ import React from 'react'
 
 const Footer: React.FC = () => {
     return (
-        <div>
-            <h1>footer</h1>
+        <div className="py-4 text-center">
+            footer
         </div>
     );
 };

@@ -5,7 +5,7 @@ const Header: React.FC = () => {
     return (
         <div>
             <Link href={"/"}>
-                <h1>Header</h1>
+                <div className="py-4 text-center">Header</div>
             </Link>
         </div>
     );
