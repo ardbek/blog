@@ -44,8 +44,11 @@ export default function Post({ params } :any) {
     const props = getPost(params);
 
     return (
-        <article>
+        <article className='prose prose-sm lg:prose-lg mx-auto'>
             <h1>{props.frontMatter.title}</h1>
+            <h1>{props.frontMatter.date}</h1>
+            <h1>{props.frontMatter.description}</h1>
+
             <MDXRemote source={props.content} components={{Button}} options={options}/>
         </article>
     )
