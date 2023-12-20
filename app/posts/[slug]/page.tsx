@@ -19,7 +19,7 @@ const options = {
     }
 }
 
-export async function generateStaticParams(){
+export async function generateStaticParams() {
     const files = fs.readdirSync(path.join('posts'))
 
     return files.map(filename => ({
@@ -27,10 +27,10 @@ export async function generateStaticParams(){
     }))
 }
 
-function getPost({slug}:{slug : string}){
-    const markdownFile = fs.readFileSync(path.join('posts',slug + '.mdx'), 'utf-8')
+function getPost({slug}: { slug: string }) {
+    const markdownFile = fs.readFileSync(path.join('posts', slug + '.mdx'), 'utf-8')
 
-    const {data: frontMatter, content } = matter(markdownFile)
+    const {data: frontMatter, content} = matter(markdownFile)
 
     return {
         frontMatter,
@@ -40,14 +40,14 @@ function getPost({slug}:{slug : string}){
 
 }
 
-export default function Post({ params } :any) {
+export default function Post({params}: any) {
     const props = getPost(params);
 
     return (
-        <article className='prose prose-sm lg:prose-lg mx-auto'>
-            <h1>{props.frontMatter.title}</h1>
-            <h1>{props.frontMatter.date}</h1>
-            <h1>{props.frontMatter.description}</h1>
+        <article className='p-3 mx-auto sm:w-10/12 md:w-10/12 lg:w-10/12 xl:w-4/12'>
+            <div className="date">{props.frontMatter.date}</div>
+            <h1 className="title">{props.frontMatter.title}</h1>
+            <div className="description">{props.frontMatter.description}</div>
 
             <MDXRemote source={props.content} components={{Button}} options={options}/>
         </article>
@@ -55,10 +55,10 @@ export default function Post({ params } :any) {
 
 }
 
-export async function generateMetadata({ params } : any){
+export async function generateMetadata({params}: any) {
     const blog = getPost(params);
 
-    return{
+    return {
         title: blog.frontMatter.title,
         description: blog.frontMatter.description,
     }

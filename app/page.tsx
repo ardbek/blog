@@ -22,7 +22,7 @@ export default function Home() {
     })
 
     return (
-        <main className="w-3/5 mx-auto">
+        <main className="p-3 mx-auto sm:w-10/12 md:w-10/12 lg:w-10/12 xl:w-4/12">
             <div>
                 {posts.map(post => (
                     <Link href={'/posts/' + post.slug} passHref key={post.slug}>

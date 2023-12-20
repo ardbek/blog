@@ -1,0 +1,26 @@
+/*글제목*/
+.title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*작성일*/
+.date{
+    font-size: 12px;
+    color: darkgray;
+}
+
+/*글 설명*/
+.description{
+    font-size: 16px;
+    color: rgb(128, 128, 128);
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
