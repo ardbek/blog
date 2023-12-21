@@ -26,9 +26,9 @@ export default function Home() {
             <div>
                 {posts.map(post => (
                     <Link href={'/posts/' + post.slug} passHref key={post.slug}>
-                        <div className='border rounded border-slate-400 mb-1 p-2'>
+                        <div className='group border rounded border-slate-300 mb-1 p-2 hover:border-slate-400'>
                             <div className="flex justify-between">
-                                <span className="">{post.meta.title}</span>
+                                <span className="group-hover:underline">{post.meta.title}</span>
                                 <span className="text-slate-400 text-xs">{post.meta.date}</span>
                             </div>
                             <div className="">
