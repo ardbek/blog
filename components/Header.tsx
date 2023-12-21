@@ -4,9 +4,12 @@ import Link from "next/link";
 const Header: React.FC = () => {
     return (
         <div>
-            <Link href={"/"}>
-                <div className="py-4 text-center">Header</div>
-            </Link>
+
+            <div className="py-4 text-center">
+                <Link href={"/"}>
+                    Header
+                </Link>
+            </div>
         </div>
     );
 };
