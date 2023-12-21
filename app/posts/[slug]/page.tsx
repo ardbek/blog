@@ -9,7 +9,7 @@ import "@/styles/codeBlock/prism-lucario.css"
 import "@/styles/table/table.css"
 import "@/styles/post.css"
 
-
+import ExternalLink from '@/components/mdx/ExternalLink';
 import Button from '@/components/mdx/Button'
 
 const options = {
@@ -45,11 +45,11 @@ export default function Post({params}: any) {
 
     return (
         <article className='p-3 mx-auto sm:w-10/12 md:w-10/12 lg:w-10/12 xl:w-4/12'>
-            <div className="date">{props.frontMatter.date}</div>
-            <h1 className="title">{props.frontMatter.title}</h1>
-            <div className="description">{props.frontMatter.description}</div>
+            <div className="date mb-5">{props.frontMatter.date}</div>
+            <h1 className="title mb-3">{props.frontMatter.title}</h1>
+            <div className="description mb-10">{props.frontMatter.description}</div>
 
-            <MDXRemote source={props.content} components={{Button}} options={options}/>
+            <MDXRemote source={props.content} components={{Button,CustomLink: ExternalLink}} options={options}/>
         </article>
     )
 
