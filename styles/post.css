@@ -16,11 +16,8 @@
     color: rgb(128, 128, 128);
 }
 
-ul {
-    list-style-type: disc;
+mark {
+    background-color: #d0d7de;
+    border-radius: 0.2em;
+    padding: 0.05em 0.1em;
 }
-
-ol {
-    list-style-type: decimal;
-}
-
