@@ -12,7 +12,7 @@ const MDXComponent: React.FC<MDXComponentProps> = ({ children }) => {
 
         if (isExternal) {
             return (
-                <a className="underline hover:bg-gray-300 rounded-md px-1" href={href} target="_blank" rel="noopener noreferrer">
+                <a className="underline hover:bg-gray-300 rounded-md px-[0.1em]" href={href} target="_blank" rel="noopener noreferrer">
                     {props.children} <ExternalLinkIcon />
                 </a>
             );
