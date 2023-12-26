@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*부드럽게 스크롤*/
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 10px;
+}
