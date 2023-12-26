@@ -6,17 +6,19 @@ import {MDXRemote} from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug';
 import rehypePrism from 'rehype-prism-plus'
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 import "@/styles/codeBlock/prism-lucario.css"
 import "@/styles/table/table.css"
 import "@/styles/post.css"
 
 import MDXComponent from "@/components/mdx/MDXComponent";
+import TableOfContents from "@/components/mdx/Toc";
 
 const options = {
     mdxOptions: {
         remarkPlugins: [remarkGfm],
-        rehypePlugins: [rehypeSlug, rehypePrism],
+        rehypePlugins: [rehypeSlug, rehypePrism,rehypeAutolinkHeadings],
     },
 };
 
@@ -53,6 +55,7 @@ export default function Post({ params }: any, source: string) {
             <div className="description mb-10">{props.frontMatter.description}</div>
 
             <MDXRemote source={props.content} components={{ wrapper: MDXComponent }} options={options} />
+            <TableOfContents/>
         </article>
     );
 }
