@@ -5,5 +5,5 @@
 /*부드럽게 스크롤*/
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 10px;
+    scroll-padding-top: 3px;
 }
