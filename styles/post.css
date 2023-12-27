@@ -16,10 +16,16 @@
     color: rgb(128, 128, 128);
 }
 
+/*글 강조*/
 mark {
     background-color: #d0d7de;
     border-radius: 0.2em;
     padding: 0.05em 0.1em;
+}
+
+img {
+    border-radius: 0.3em;
+    box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
