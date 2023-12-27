@@ -29,9 +29,11 @@ h2 {
 }
 
 ul {
+    margin-left: 13px;
     list-style: disc;
 }
 
 ol {
+    margin-left: 13px;
     list-style: decimal;
 }
