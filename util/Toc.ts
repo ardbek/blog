@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
 const option = {
-    rootMargin: '-76px 0px 0px 0px',
     threshold: 0.4,
+    rootMargin: '-80px 0px -80% 0px',
 };
 
 export function getIntersectionObserver(
