@@ -23,23 +23,47 @@ const options = {
 };
 
 export async function generateStaticParams() {
-    const files = fs.readdirSync(path.join('posts'));
+    const postDir = path.join('posts');
+    const items = fs.readdirSync(postDir);
+    let paths: any[] = [];
 
-    return files.map((filename) => ({
-        slug: filename.replace('.mdx', ''),
-    }));
+    items.forEach(item => {
+        const itemPath = path.join(postDir, item);
+        const isDirectory = fs.statSync(itemPath).isDirectory();
+
+        if (isDirectory) {
+            const files = fs.readdirSync(itemPath);
+            files.forEach(filename => {
+                paths.push({
+                    params: {
+                        slug: [item, filename.replace('.mdx', '')],
+                    },
+                });
+            });
+        } else {
+            paths.push({
+                params: {
+                    slug: [item.replace('.mdx', '')],
+                },
+            });
+        }
+    });
+
+    return paths;
 }
 
-function getPost({ slug }: { slug: string }) {
-    const markdownFile = fs.readFileSync(path.join('posts', slug + '.mdx'), 'utf-8');
+function getPost({ slug }: { slug: string[] }) {
+    const filePath = path.join('posts', ...slug) + '.mdx';
+    const markdownFile = fs.readFileSync(filePath, 'utf-8');
     const { data: frontMatter, content } = matter(markdownFile);
 
     return {
         frontMatter,
-        slug,
+        slug: slug.join('/'), // URL 경로로 사용될 slug 문자열
         content,
     };
 }
+
 
 interface PostProps {
     source: string;
