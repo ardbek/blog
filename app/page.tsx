@@ -1,31 +1,45 @@
 import fs from 'fs';
-import path from 'path'
-import matter from 'gray-matter'
+import path from 'path';
+import matter from 'gray-matter';
 
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function Home() {
-    const postDir = "posts"
+    const postDir = "posts";
 
-    const files = fs.readdirSync(path.join(postDir))
+    const getAllFiles = (dirPath:string, arrayOfFiles:string[] = []) => {
+        const files = fs.readdirSync(dirPath);
 
-    const posts = files.map(filename => {
-        const fileContent = fs.readFileSync(path.join(postDir, filename), 'utf-8')
+        files.forEach(file => {
+            if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+                arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
+            } else {
+                arrayOfFiles.push(path.join(dirPath, "/", file));
+            }
+        });
 
-        const {data: frontMatter} = matter(fileContent)
+        return arrayOfFiles;
+    }
+
+    // 모든 파일 가져오기
+    const allFiles = getAllFiles(postDir);
+
+    // 포스트 데이터를 추출
+    const posts = allFiles.map(filePath => {
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        const {data: frontMatter} = matter(fileContent);
 
         return {
             meta: frontMatter,
-            slug: filename.replace('.mdx', '')
+            slug: filePath.replace(postDir + '/', '').replace('.mdx', '')
         }
-
-    })
+    });
 
     return (
         <main className="p-3 mx-auto sm:w-10/12 md:w-10/12 lg:w-10/12 xl:w-4/12">
             <div>
                 {posts.map(post => (
-                    <Link href={'/posts/' + post.slug} passHref key={post.slug}>
+                    <Link href={'' + post.slug} passHref key={post.slug}>
                         <div className='group border rounded border-slate-300 mb-1 p-2  transition-all hover:border-slate-400'>
                             <div className="flex justify-between">
                                 <span className="transition-all group-hover:underline">{post.meta.title}</span>
