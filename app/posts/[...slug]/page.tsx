@@ -53,14 +53,13 @@ export async function generateStaticParams() {
 }
 
 function getPost({ slug }: { slug: string[] }) {
-    console.log('Slug:', slug);
-    const filePath = path.join('posts', ...slug) + '.mdx';
+    const filePath = path.join(process.cwd(), 'posts', ...slug) + '.mdx';
     const markdownFile = fs.readFileSync(filePath, 'utf-8');
     const { data: frontMatter, content } = matter(markdownFile);
 
     return {
         frontMatter,
-        slug: slug.join('/'), // URL 경로로 사용될 slug 문자열
+        slug: slug.join('/'),
         content,
     };
 }
