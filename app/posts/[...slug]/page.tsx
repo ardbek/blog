@@ -68,6 +68,11 @@ function getPost(slugArray: string[]) {
     }
 }
 
+
+interface PostProps {
+    source: string;
+}
+
 export default function Post({ params }: { params: { slug: string[] } }) {
     const props = getPost(params.slug);
 
