@@ -53,6 +53,7 @@ export async function generateStaticParams() {
 }
 
 function getPost({ slug }: { slug: string[] }) {
+    console.log('Slug:', slug);
     const filePath = path.join('posts', ...slug) + '.mdx';
     const markdownFile = fs.readFileSync(filePath, 'utf-8');
     const { data: frontMatter, content } = matter(markdownFile);
