@@ -59,7 +59,7 @@ function getPost(slugArray: string[]) {
         const { data: frontMatter, content } = matter(markdownFile);
         return {
             frontMatter,
-            slug: slugArray.join('/'),
+            slug: `/posts/${slugArray.join('/')}`,
             content,
         };
     } catch (error) {
@@ -67,6 +67,7 @@ function getPost(slugArray: string[]) {
         return null;
     }
 }
+
 
 export default function Post({ params }: { params: { slug: string[] } }) {
     const props = getPost(params.slug);
