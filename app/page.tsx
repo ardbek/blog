@@ -1,28 +1,29 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+
 import Link from 'next/link';
 
 export default function Home() {
-    const getAllFiles = (dirPath: string, arrayOfFiles: string[] = []) => {
+    const postDir = "posts";
+
+    const getAllFiles = (dirPath:string, arrayOfFiles:string[] = []) => {
         const files = fs.readdirSync(dirPath);
 
         files.forEach(file => {
-            const filePath = path.join(dirPath, file); // 경로 조합
-            if (fs.statSync(filePath).isDirectory()) {
-                arrayOfFiles = getAllFiles(filePath, arrayOfFiles);
+            if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+                arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
             } else {
-                arrayOfFiles.push(filePath);
+                arrayOfFiles.push(path.join(dirPath, "/", file));
             }
         });
 
         return arrayOfFiles;
     }
 
-    const postDir = "posts"; // post 디렉터리 경로
-
     // 모든 파일 가져오기
     const allFiles = getAllFiles(postDir);
+
 
     // 포스트 데이터를 추출
     const posts = allFiles.map(filePath => {
@@ -39,7 +40,7 @@ export default function Home() {
         <main className="p-3 mx-auto sm:w-10/12 md:w-10/12 lg:w-10/12 xl:w-4/12">
             <div>
                 {posts.map(post => (
-                    <Link href={`${post.slug}`} passHref key={post.slug}>
+                    <Link href={post.slug} passHref key={post.slug}>
                         <div className='group border rounded border-slate-300 mb-1 p-2  transition-all hover:border-slate-400'>
                             <div className="flex justify-between">
                                 <span className="transition-all group-hover:underline">{post.meta.title}</span>
