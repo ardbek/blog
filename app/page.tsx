@@ -23,7 +23,7 @@ export default function Home() {
                 const {data: frontMatter} = matter(fileContent);
 
                 posts.push({
-                    year: item,
+                    category: item,
                     meta: frontMatter,
                     slug: filename.replace('.mdx', '')
                 });
@@ -48,7 +48,7 @@ export default function Home() {
             <div>
                 {
                     posts.map(post => (
-                        <Link href={post.year ? `/posts/${post.year}/${post.slug}` : `/posts/${post.slug}`} passHref
+                        <Link href={post.category ? `/posts/${post.category}/${post.slug}` : `/posts/${post.slug}`} passHref
                               key={post.slug}>
                             <div
                                 className='group border rounded border-slate-300 mb-1 p-2 transition-all hover:border-slate-400'>
