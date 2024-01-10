@@ -44,7 +44,7 @@ export default function Home() {
     });
 
     return (
-        <main className="p-3 mx-auto sm:w-10/12 md:w-10/12 lg:w-10/12 xl:w-4/12">
+        <main className="p-3 mx-auto sm:w-10/12 md:w-10/12 lg:max-w-[768px]">
             <div>
                 {
                     posts.map(post => (

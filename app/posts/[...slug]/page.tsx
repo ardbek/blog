@@ -73,7 +73,7 @@ export default function Post({ params }: any, source: string) {
     const props = getPost(params);
 
     return (
-        <article className="flex flex-col-reverse sm:flex-row justify-between p-3 mx-auto sm:w-full md:w-full lg:w-10/12 xl:w-4/12">
+        <article className="flex flex-col-reverse sm:flex-row justify-between p-3 mx-auto sm:w-full md:w-full lg:lg:max-w-[768px]">
             <div id="1" className="flex-1">
                 <div>
                     <div className="date mb-5">{props.frontMatter.date}</div>
