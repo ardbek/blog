@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug';
 import rehypePrism from 'rehype-prism-plus'
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { PluggableList } from 'unified';
 
 import "@/styles/codeBlock/prism-lucario.css"
 import "@/styles/table/table.css"
@@ -17,8 +18,12 @@ import TableOfContents from "@/components/mdx/Toc";
 
 const options = {
     mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [rehypeSlug, rehypePrism,rehypeAutolinkHeadings],
+        remarkPlugins: [remarkGfm] as PluggableList,
+        rehypePlugins: [
+            rehypeSlug,
+            [rehypePrism as any, { showLineNumbers: true }],
+            rehypeAutolinkHeadings
+        ] as PluggableList,
     },
 };
 
