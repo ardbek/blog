@@ -24,4 +24,4 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children }) => {
 };
 
 export default CodeBlock;
-``
+
