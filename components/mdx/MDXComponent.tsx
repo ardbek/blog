@@ -1,10 +1,20 @@
 import React from 'react';
 import ExternalLinkIcon from './ExternalLinkIcon';
-import CodeBlock from "@/components/mdx/CodeBlock";
-
+import {CopyButton} from "@/components/mdx/CopyButton";
 
 interface MDXComponentProps {
     children: React.ReactNode;
+}
+
+function reactNodeToString(node: React.ReactNode): string {
+    if (typeof node === 'string' || typeof node === 'number') {
+        return node.toString();
+    } else if (React.isValidElement(node) && node.props) {
+        return reactNodeToString(node.props.children);
+    } else if (Array.isArray(node)) {
+        return node.map(reactNodeToString).join('');
+    }
+    return '';
 }
 
 const MDXComponent: React.FC<MDXComponentProps> = ({ children }) => {
@@ -23,20 +33,21 @@ const MDXComponent: React.FC<MDXComponentProps> = ({ children }) => {
         return <a {...props}>{props.children}</a>;
     };
 
-    const renderCopyButton = (props: any) => {
+    const renderPre = (props: any) => {
+        const codeText = reactNodeToString(props.children);
 
-        if (true) {
-            return (
-                <CodeBlock>{children}</CodeBlock>
-            );
-        }
-
+        return (
+            <pre {...props}>
+        <CopyButton text={codeText} />
+                {props.children}
+    </pre>
+        );
     };
 
     return (
         <>
             {React.Children.map(children, (child) =>
-                React.isValidElement(child) ? React.cloneElement(child as React.ReactElement<any>, { components: { a: renderLink ,pre:renderCopyButton } }) : child
+                React.isValidElement(child) ? React.cloneElement(child as React.ReactElement<any>, { components: { a: renderLink, pre: renderPre } }) : child
             )}
         </>
     );
