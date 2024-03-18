@@ -1,7 +1,8 @@
 "use client";
 
-import {useState} from "react";
-import ClipBoard from "./ClipBoard";
+import React, {useState} from "react";
+import {FaCheck} from "react-icons/fa6";
+import {FaRegCopy} from "react-icons/fa";
 
 type Text = {
     text: string;
@@ -24,9 +25,12 @@ export const CopyButton = ({text}: Text) => {
             className='dark:text-black flex ml-auto gap-2'
             disabled={isCopied}
             onClick={copy}
+            style={{
+                position: 'absolute',
+                right: '30px'
+            }}
         >
-            <ClipBoard/>
-            {isCopied ? "Copied!" : "Copy"}
+            {isCopied ? <FaCheck /> : <FaRegCopy />}
         </button>
     );
 };

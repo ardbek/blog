@@ -1,10 +1,10 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, {ReactNode, ReactElement} from 'react';
 
 interface CodeBlockProps {
     children: ReactNode;
 }
 
-const CodeBlock: React.FC<CodeBlockProps> = ({ children }) => {
+const CodeBlock: React.FC<CodeBlockProps> = ({children}) => {
     const copyToClipboard = (code: string) => {
         navigator.clipboard.writeText(code);
     };

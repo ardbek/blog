@@ -129,6 +129,7 @@ pre[class*="language-"] {
 .code-highlight {
     float: left; /* 1 */
     min-width: 100%; /* 2 */
+    margin-top: 0.7rem;
 }
 
 .code-line {
