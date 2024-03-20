@@ -27,10 +27,13 @@ export const CopyButton = ({text}: Text) => {
             onClick={copy}
             style={{
                 position: 'absolute',
-                right: '30px'
+                right: '10px',
+                top: '10px',
+                zIndex: 3,
+                color: 'white'
             }}
         >
-            {isCopied ? <FaCheck /> : <FaRegCopy />}
+            {isCopied ? <FaCheck/> : <FaRegCopy/>}
         </button>
     );
 };

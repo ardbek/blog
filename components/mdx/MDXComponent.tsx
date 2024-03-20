@@ -17,15 +17,16 @@ function reactNodeToString(node: React.ReactNode): string {
     return '';
 }
 
-const MDXComponent: React.FC<MDXComponentProps> = ({ children }) => {
+const MDXComponent: React.FC<MDXComponentProps> = ({children}) => {
     const renderLink = (props: any) => {
-        const { href } = props;
+        const {href} = props;
         const isExternal = href.startsWith('http') || href.startsWith('//');
 
         if (isExternal) {
             return (
-                <a className="underline hover:bg-gray-300 rounded-md px-[0.1em]" href={href} target="_blank" rel="noopener noreferrer">
-                    {props.children} <ExternalLinkIcon />
+                <a className="underline hover:bg-gray-300 rounded-md px-[0.1em]" href={href} target="_blank"
+                   rel="noopener noreferrer">
+                    {props.children} <ExternalLinkIcon/>
                 </a>
             );
         }
@@ -37,17 +38,24 @@ const MDXComponent: React.FC<MDXComponentProps> = ({ children }) => {
         const codeText = reactNodeToString(props.children);
 
         return (
-            <pre {...props}>
-        <CopyButton text={codeText} />
+            <div style={{position: 'relative'}}>
+                <CopyButton text={codeText}/>
+                <pre {...props} style={{overflowX: 'auto', position: 'relative', maxWidth: '100%'}}>
                 {props.children}
-    </pre>
+            </pre>
+            </div>
         );
     };
 
     return (
         <>
             {React.Children.map(children, (child) =>
-                React.isValidElement(child) ? React.cloneElement(child as React.ReactElement<any>, { components: { a: renderLink, pre: renderPre } }) : child
+                React.isValidElement(child) ? React.cloneElement(child as React.ReactElement<any>, {
+                    components: {
+                        a: renderLink,
+                        pre: renderPre
+                    }
+                }) : child
             )}
         </>
     );
