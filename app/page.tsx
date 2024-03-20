@@ -56,6 +56,13 @@ export default function Home() {
                                     <span className="transition-all group-hover:underline">{post.meta.title}</span>
                                     <span className="text-slate-400 text-xs">{post.meta.date}</span>
                                 </div>
+
+                                {post.category && (
+                                    <div className="text-slate-500 text-xs mt-1">
+                                        Category: <span className="font-semibold">{post.category}</span>
+                                    </div>
+                                )}
+
                                 <div className="">
                                     <p className="text-xs text-slate-500">{post.meta.description}</p>
                                 </div>
