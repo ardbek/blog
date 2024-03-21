@@ -3,6 +3,16 @@ import path from 'path'
 import matter from 'gray-matter'
 
 import Link from 'next/link'
+import {FaPen, FaTools, FaStickyNote} from 'react-icons/fa';
+
+type CategoryName = 'writing' | 'craft' | 'note';
+
+const categoryIcons = {
+    writing: <FaPen color="#ffcc99" />,
+    craft: <FaTools color="#cfcfc4" />,
+    note: <FaStickyNote color="#b39eb5" />
+};
+
 
 export default function Home() {
     const postDir = "posts";
@@ -48,20 +58,24 @@ export default function Home() {
             <div>
                 {
                     posts.map(post => (
-                        <Link href={post.category ? `/posts/${post.category}/${post.slug}` : `/posts/${post.slug}`} passHref
+                        <Link href={post.category ? `/posts/${post.category}/${post.slug}` : `/posts/${post.slug}`}
+                              passHref
                               key={post.slug}>
                             <div
                                 className='group border rounded border-slate-300 mb-1 p-2 transition-all hover:border-slate-400'>
                                 <div className="flex justify-between">
-                                    <span className="transition-all group-hover:underline">{post.meta.title}</span>
+                                    <span className="flex items-center">
+                                        {post.category && (
+                                            <span className="text-slate-500 text-xs mt-1 mr-1.5" style={{ marginTop: '-0.125em' }}>
+                                                {categoryIcons[post.category as CategoryName]}
+                                            </span>
+                                        )}
+                                        <span className="transition-all group-hover:underline">
+                                            {post.meta.title}
+                                        </span>
+                                    </span>
                                     <span className="text-slate-400 text-xs">{post.meta.date}</span>
                                 </div>
-
-                                {post.category && (
-                                    <div className="text-slate-500 text-xs mt-1">
-                                        Category: <span className="font-semibold">{post.category}</span>
-                                    </div>
-                                )}
 
                                 <div className="">
                                     <p className="text-xs text-slate-500">{post.meta.description}</p>
