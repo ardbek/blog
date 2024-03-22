@@ -16,9 +16,13 @@ export default function RootLayout({
     return (
         <html lang="ko">
             <body className="mx-auto">
-                <Header/>
-                {children}
-                <Footer/>
+            <div className="layout"> {/* Flex 컨테이너로 설정 */}
+                <Header />
+                <main className="content"> {/* 콘텐츠를 위한 주 영역 */}
+                    {children}
+                </main>
+                <Footer />
+            </div>
             </body>
         </html>
     )

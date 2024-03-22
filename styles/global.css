@@ -7,3 +7,13 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
 }
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 전체 화면 높이 */
+}
+
+.content {
+    flex: 1; /* 콘텐츠 영역이 가능한 모든 공간을 차지하도록 함 */
+}
