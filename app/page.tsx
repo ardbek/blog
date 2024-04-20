@@ -61,8 +61,7 @@ export default function Home() {
                         <Link href={post.category ? `/posts/${post.category}/${post.slug}` : `/posts/${post.slug}`}
                               passHref
                               key={post.slug}>
-                            <div
-                                className='group border rounded border-slate-300 mb-1 p-2 transition-all hover:border-slate-400'>
+                            <div className='group border rounded border-slate-300 mb-3 p-3 transition-all hover:border-slate-400'>
                                 <div className="flex justify-between">
                                     <span className="flex items-center">
                                         {post.category && (
