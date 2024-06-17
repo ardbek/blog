@@ -87,11 +87,11 @@ export default function Post({ params }: any, source: string) {
                     <MDXRemote source={props.content} components={{ wrapper: MDXComponent }} options={options} />
                 </div>
             </div>
-            <div id="2" className="sticky top-0 flex-1 max-h-screen overflow-y-auto">
+            {/*<div id="2" className="sticky top-0 flex-1 max-h-screen overflow-y-auto">
                 <div className="hidden lg:block">
                     <TableOfContents />
                 </div>
-            </div>
+            </div>*/}
         </article>
 
 
