@@ -80,7 +80,7 @@ export default function Post({ params }: any, source: string) {
     return (
         <article className="flex flex-col-reverse sm:flex-row justify-between p-3 mx-auto sm:w-full md:w-full lg:lg:max-w-[768px]">
             <div id="1" className="flex-1">
-                <div>
+                <div className="sm:w-full md:w-full lg:lg:max-w-[768px]">
                     <div className="date mb-5">{props.frontMatter.date}</div>
                     <h1 className="title mb-3">{props.frontMatter.title}</h1>
                     <div className="description mb-10">{props.frontMatter.description}</div>
