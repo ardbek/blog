@@ -16,7 +16,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({children}) => {
     const codeContent = isReactElement(children) ? children.props.children : '';
 
     return (
-        <div>
+        <div className='mb-3'>
             {children}
             <button onClick={() => copyToClipboard(codeContent.toString())}>Copy</button>
         </div>
